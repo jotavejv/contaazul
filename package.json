@@ -1,0 +1,24 @@
+{
+  "name": "contaazul-desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pingy dev",
+    "export": "pingy export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jotavejv@bitbucket.org/jotavejv/contaazul-desafio.git"
+  },
+  "author": "jotavejv",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/jotavejv/contaazul-desafio#readme",
+  "devDependencies": {
+    "@pingy/cli": "^0.6.6",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "node-sass": "^4.5.3"
+  }
+}
