@@ -1,4 +1,8 @@
-
-h1 {
-	color: red;
+html, body{
+	height:100%;
 }
+body{
+	background: url("../layout.png") no-repeat center top;
+}
+
+@import "componentes/skin.scss";
