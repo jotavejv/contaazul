@@ -85,7 +85,7 @@ function render (cars) {
     let template = `
 ${cars.map(car =>
         `<tr>
-        <td><input type="checkbox" id="check-${car.placa}"><span class="icon icon--check"></span>${car.placa}</td>
+        <td><input type="checkbox" id="check-${car.placa}"><span class="icon icon--check"></span>${car.placa} <div class="icon icon--trash"></div><div class="icon icon--pencil"></div></td>
         <td>${car.modelo}</td>
         <td>${car.marca}</td>
         <td>${car.imagem ? `<a href="${car.imagem}" class="foto">Imagem</a>` : 'Sem foto'}</td>
@@ -130,9 +130,9 @@ $('.modal-foto .close').addEventListener('click', function (e) {
 });
 
 $('.btn.cadastro').addEventListener('click', function () {
-    $('.modal-carro').classList.add('active');
-    $('.modal-carro form').reset();
-    $('.modal-carro form').addEventListener('submit', function (e) {
+    $('.modal--carro').classList.add('active');
+    $('.modal--carro form').reset();
+    $('.modal--carro form').addEventListener('submit', function (e) {
         e.preventDefault();
         let form = new FormData(e.target)
         let newCar = {};
@@ -142,7 +142,7 @@ $('.btn.cadastro').addEventListener('click', function () {
         cars.unshift(newCar);
         store.set('cars', cars);
         console.log(newCar);
-        $('.modal-carro').classList.remove('active');
+        $('.modal--carro').classList.remove('active');
         //alert('sucesso');
         render(cars);
     });

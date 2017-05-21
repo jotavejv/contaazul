@@ -57,7 +57,37 @@
 				<img src="" alt="">
 			</div>
 		</div>
-		<div class="modal modal-carro">
+		<div class="modal modal--carro">
+			<div class="inner">
+				<a href="" class="close">x</a>
+				<form>
+					<table>
+						<thead>
+						<tr>
+							<th>placa</th>
+							<th>modelo</th>
+							<th>marca</th>
+							<th>foto</th>
+							<th>combustível</th>
+							<th>valor</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td><input type="text" name="placa" placeholder="_ _ _ - _ _ _ _" pattern="[a-z | A-Z]{3}-\d{4}" maxlength="8" required></td>
+							<td><input type="text" name="modelo" required></td>
+							<td><input type="text" name="marca" required></td>
+							<td><input type="url" name="imagem" placeholder="URL da foto"></td>
+							<td><input type="text" name="combustivel" required></td>
+							<td><input type="number" name="valor" min="0" required></td>
+						</tr>
+						</tbody>
+					</table>
+					<button type="submit" class="btn btn--success">Cadastrar</button>
+				</form>
+			</div>
+		</div>
+		<div class="modal modal--carro-update">
 			<div class="inner">
 				<a href="" class="close">x</a>
 				<form>
