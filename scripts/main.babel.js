@@ -118,6 +118,33 @@ ${cars.map( (car, index) =>
             render(cars);
         }
     }));
+
+    Array.from($$('.icon--pencil')).forEach( item => item.addEventListener('click', function (e) {
+        $('.modal--carro-update').classList.add('active');
+        let index = +(e.target.closest('tr').id);
+        Object.keys(carsPagination[index]).forEach(key => {
+            $(`.modal--carro-update input[name=${key}]`).value = carsPagination[index][key];
+        });
+
+        // cars.splice(index, 1);
+        // store.set('cars', cars);
+        // render(cars);
+
+        $('.modal--carro-update form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            cars = carsPagination;
+            let form = new FormData(e.target);
+            for (let [key, value] of form.entries()) {
+                console.log(cars[index][key]);
+                cars[index][key] = value;
+            }
+            console.info(cars[index]);
+            store.set('cars', cars);
+            $('.modal--carro-update').classList.remove('active');
+            render(cars);
+        });
+
+    }));
 }
 render(cars);
 
@@ -151,6 +178,11 @@ $('.modal--carro .close').addEventListener('click', function (e) {
     $('.modal--carro').classList.remove('active');
 });
 
+$('.modal--carro-update .close').addEventListener('click', function (e) {
+    e.preventDefault();
+    $('.modal--carro-update').classList.remove('active');
+});
+
 $('.modal--carro form').addEventListener('submit', function (e) {
     e.preventDefault();
     let form = new FormData(e.target);
@@ -167,6 +199,24 @@ $('.modal--carro form').addEventListener('submit', function (e) {
     render(cars);
     e.target.reset();
 });
+
+// $('.modal--carro-update form').addEventListener('submit', function (e) {
+//     e.preventDefault();
+//     console.log("update submit")
+//     let form = new FormData(e.target);
+//     let newCar = {};
+//     for (let [key, value] of form.entries()) {
+//         console.log(key, value);
+//         newCar[key] = value;
+//     }
+//     // cars = carsPagination;
+//     // cars.unshift(newCar);
+//     // store.set('cars', cars);
+//     // console.log(newCar);
+//     // $('.modal--carro').classList.remove('active');
+//     // render(cars);
+//     // e.target.reset();
+// });
 
 
 //route

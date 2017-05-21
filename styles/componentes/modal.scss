@@ -49,7 +49,7 @@
       }
     }
   }
-  &.modal--carro{
+  &.modal--carro, &.modal--carro-update{
     .inner{
       padding: 30px;
       padding-top: 50px;
