@@ -1,0 +1,73 @@
+//commmon layout
+*{
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+$layout: 1024px;
+$base-font-size: 12px;
+
+//buttons
+button{
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+.btn{
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  &.btn--success{
+    background: $button;
+    color: white;
+    font-size: 12px;
+    text-transform: capitalize;
+  }
+}
+
+//form
+input[type="text"],
+input[type="url"],
+input[type="number"]{
+  border: none;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  background: transparent;
+}
+
+//icons
+.icon{
+  position: relative;
+  display: inline-block;
+  &.icon--search{
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    &:before{
+      content: '';
+      position: absolute;
+      border: solid .15em #395A7A;
+      border-radius: 50%;
+      width: .8em;
+      height: .8em;
+      top: 0;
+      left: 0;
+    }
+    &:after{
+      content: '';
+      position: absolute;
+      border: solid .1em #395A7A;
+      background: #395A7A;
+      width: .5em;
+      transform: rotate(45deg) translateX(1.2em) translateY(.2em);
+      top: 0;
+      left: 0;
+    }
+  }
+}

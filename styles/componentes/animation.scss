@@ -1,6 +1,14 @@
-$header:  #2687E9;
-$button: #4ABA58;
-$border-color: #C9D3DD;
-$highlight: #D8E9FB;
-$gray: #F8FAFC;
-$font-color: #395B7B;
+@keyframes fade {
+  to{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes fadeUp {
+  to{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}

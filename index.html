@@ -9,7 +9,81 @@
 		<link rel="stylesheet" href="styles/main.css">
 	</head>
 	<body>
-
-		<script src="scripts/main.js"></script>
+	<main>
+		<div class="container">
+			<header class="main-header">
+				<h1>ContaAzul</h1>
+				<img src="images/ContaAzul.png" alt="">
+			</header>
+			<section class="cars-info">
+				<header>
+					<button class="addCar btn btn--success cadastro">novo carro</button>
+					<div class="search">
+						<form novalidate>
+							<input type="text" placeholder="Pesquisar">
+							<button type="submit" class="icon-search">
+								<span class="icon icon--search"></span>
+							</button>
+						</form>
+					</div>
+				</header>
+				<div class="cars-table">
+					<table>
+						<thead>
+						<tr>
+							<th>placa</th>
+							<th>modelo</th>
+							<th>marca</th>
+							<th>foto</th>
+							<th>combustível</th>
+							<th>valor</th>
+						</tr>
+						</thead>
+						<tbody id="data">
+						<!--template from js-->
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+		<div class="modal modal-foto">
+			<div class="inner">
+				<a href="" class="close">x</a>
+				<img src="" alt="">
+			</div>
+		</div>
+		<div class="modal modal-carro">
+			<div class="inner">
+				<a href="" class="close">x</a>
+				<form>
+					<table>
+						<thead>
+						<tr>
+							<th>placa</th>
+							<th>modelo</th>
+							<th>marca</th>
+							<th>foto</th>
+							<th>combustível</th>
+							<th>valor</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td><input type="text" name="placa" placeholder="_ _ _ - _ _ _ _" pattern="[a-z]{3}-\d{4}" required></td>
+							<td><input type="text" name="modelo" required></td>
+							<td><input type="text" name="marca" required></td>
+							<td><input type="url" name="imagem" placeholder="URL da foto"></td>
+							<td><input type="text" name="combustivel" required></td>
+							<td><input type="number" name="valor" min="0" required></td>
+						</tr>
+						</tbody>
+					</table>
+					<button type="submit" class="btn btn--success">Cadastrar</button>
+				</form>
+			</div>
+		</div>
+	</main>
+	<script src="scripts/store.min.js"></script>
+	<script src="scripts/main.js"></script>
 	</body>
 </html>

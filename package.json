@@ -19,6 +19,10 @@
     "@pingy/cli": "^0.6.6",
     "babel-core": "^6.24.1",
     "babel-preset-env": "^1.4.0",
-    "node-sass": "^4.5.3"
+    "node-sass": "^4.5.3",
+    "store": "^2.0.4"
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0"
   }
 }
