@@ -111,10 +111,17 @@ Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListene
 $('#prev').addEventListener('click', function () {
     let currentPage = $('#pagination li.active a').textContent;
     let goPage = '#!/carros/'+(+currentPage - 1);
-    console.log(goPage);
-    router.navigate(goPage)
+    if (currentPage - 1 > 0){
+        router.navigate(goPage)
+    }
 });
 
+$('#next').addEventListener('click', function () {
+    let currentPage = $('#pagination li.active a').textContent;
+    let goPage = '#!/carros/'+(+currentPage + 1);
+    //if(carsPagination);
+    router.navigate(goPage)
+});
 
 $('.modal-foto .close').addEventListener('click', function (e) {
     e.preventDefault();
@@ -154,10 +161,16 @@ router
 
             let pageCars = carsPagination;
             if (param.id > 1){
-                console.warn(pageCars, ((param.id*5) - 5), (param.id*5));
+
                 pageCars = carsPagination.slice( ((param.id*5) - 5), (param.id*5) );
-                console.log("maior que um", pageCars);
-                render(pageCars);
+                if(!pageCars.length){
+                    router.navigate('/carros');
+                    pageCars = carsPagination.slice(0, 5);
+                    render(pageCars);
+                }else{
+                    render(pageCars);
+                }
+
             }else{
                 pageCars = carsPagination.slice(0, 5);
                 render(pageCars);
