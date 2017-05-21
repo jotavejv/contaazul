@@ -1,7 +1,7 @@
+//dom
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
-// .closest() polyfill
+/* .closest() polyfill */
 if (window.Element && !Element.prototype.closest) {
     Element.prototype.closest =
         function(s) {
@@ -15,6 +15,25 @@ if (window.Element && !Element.prototype.closest) {
             return el;
         };
 }
+
+const root = null;
+const useHash = true;
+const hash = '#!'; // Defaults to: '#'
+const router = new Navigo(root, useHash, hash);
+router
+    .on({
+        '/carros/:id': function (param){
+            console.log(param.id);
+            if(isNaN(param.id)) router.navigate('/carros');
+        },
+        'carros': function () {
+            console.log('home');
+        },
+        '*': function () {
+            router.navigate('/carros');
+        }
+    })
+    .resolve();
 
 //currency
 function currencyFormat (num) {

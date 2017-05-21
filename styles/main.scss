@@ -35,6 +35,7 @@ header.main-header{
 }
 .cars-info{
   padding: 20px 40px;
+  padding-bottom: 40px;
   header{
     display: flex;
     justify-content: space-between;
@@ -149,6 +150,45 @@ header.main-header{
             visibility: visible;
           }
         }
+      }
+    }
+  }
+}
+footer{
+  max-width: $layout;
+  margin: 0 auto;
+  ul{
+    display: flex;
+    justify-content: center;
+    li{
+      font-family: $base-font;
+      width: 40px;
+      height: 40px;
+      font-size: $base-font-size;
+      font-weight: bold;
+      color: $font-color;
+      line-height: 40px;
+      text-align: center;
+      background: #fff;
+      border: solid 1px $border-color;
+      cursor: pointer;
+      &:first-child{
+        border-right: none;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      &:last-child{
+        border-left: none;
+      }
+      &:hover{
+        background: #FFFAEB;
+      }
+      &.active{
+        background: $highlight;
+        border-color: #58A2ED;
+      }
+      a{
+        display: block;
       }
     }
   }
