@@ -1,12 +1,24 @@
 //commmon layout
+$layout: 1024px;
+$base-font-size: 12px;
+$base-font: 'Open Sans', sans-serif;
+
+//general
 *{
   box-sizing: border-box;
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
-$layout: 1024px;
-$base-font-size: 12px;
+body{
+  font-family: $base-font;
+}
+
+//utils
+.tar{
+  text-align: right;
+}
 
 //buttons
 button{
@@ -68,6 +80,18 @@ input[type="number"]{
       transform: rotate(45deg) translateX(1.2em) translateY(.2em);
       top: 0;
       left: 0;
+    }
+  }
+  &.icon--check{
+    display:inline-block;
+    &:after{
+      content: '';
+      display: block;
+      width: 5px;
+      height: 9px;
+      border: solid $font-color;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
   }
 }

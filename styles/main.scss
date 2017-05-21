@@ -10,7 +10,7 @@ html, body{
   height:100%;
 }
 body{
-  //background: url("../layout.png") no-repeat center top;
+  background: url("../layout.png") no-repeat center top;
   background-color: #F1F4F9;
 }
 
@@ -34,13 +34,12 @@ header.main-header{
   }
 }
 .cars-info{
-  border: solid 1px gray;
   padding: 20px 40px;
   header{
     display: flex;
     justify-content: space-between;
     .addCar{
-      padding: 14px 40px; //@override btn
+      padding: 12px 40px; //@override btn
     }
     .search{
       background: #fff;
@@ -82,24 +81,74 @@ header.main-header{
     }
   }
   .cars-table{
-    margin-top: 100px;
-    table {
+    margin-top: 20px;
+    table{
       width:100%;
       height:100%;
-      border: 1px solid #C0C0C0;
       border-collapse: collapse;
-      font-family: sans-serif;
-      th {
-        border:1px solid #C0C0C0;
-        padding:5px;
+      tr{
+        background: #fff;
+        border: solid 1px $border-color;
+        transition: background .2s ease;
+        &.active{
+          background: $highlight;
+          border: solid 1px #58A2ED;
+          td{
+            border-top: solid 1px #58A2ED;
+          }
+        }
+      }
+      th{
+        position: relative;
+        padding: 13px 10px;
         background: $gray;
         text-transform: capitalize;
+        font-size: $base-font-size;
+        color: $font-color;
+        text-align: left;
       }
-      td {
-        border:1px solid #C0C0C0;
+      td{
+        position: relative;
         text-align:left;
-        padding:5px;
-        background:#FFFFFF;
+        font-size: 13px;
+        color: #67819A;
+        font-weight: bold;
+        padding: 18px 10px;
+        .icon--check{
+          top: 20px !important;
+        }
+      }
+      .foto{
+        color: #58A2ED;
+      }
+      input[type=checkbox]{
+        outline: none;
+        -webkit-appearance: none;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+        margin-left: 3px;
+        border-radius: 4px;
+        cursor: pointer;
+        vertical-align: middle;
+        border: solid 1px $border-color;
+        & + .icon{
+          position: absolute;
+          left: 19px;
+          top: 16px;
+          opacity: 0;
+          visibility: hidden;
+          transition: all .2s ease;
+          pointer-events: none;
+        }
+        &:checked{
+          border-color: #58A2ED;
+          & + .icon{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
       }
     }
   }

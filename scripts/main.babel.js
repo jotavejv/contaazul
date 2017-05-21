@@ -16,6 +16,11 @@ if (window.Element && !Element.prototype.closest) {
         };
 }
 
+//currency
+function currencyFormat (num) {
+    return (+num).toFixed(2).replace(",", ".").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+}
+
 // init
 if(!store.get('cars')){
     //model
@@ -55,12 +60,12 @@ function render (cars) {
     let template = `
 ${cars.map(car =>
         `<tr>
-        <td>${car.placa}</td>
+        <td><input type="checkbox" id="check-${car.placa}"><span class="icon icon--check"></span>${car.placa}</td>
         <td>${car.modelo}</td>
         <td>${car.marca}</td>
         <td>${car.imagem ? `<a href="${car.imagem}" class="foto">Imagem</a>` : 'Sem foto'}</td>
         <td>${car.combustivel}</td>
-        <td>${car.valor}</td>
+        <td>${currencyFormat(car.valor)}</td>
     </tr>`).join('')
         }
 `;
@@ -75,6 +80,10 @@ Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function
     $('.modal-foto').classList.add('active');
 }));
 
+Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
+    console.log("check");
+    event.target.closest('tr').classList.toggle('active');
+}));
 
 
 $('.modal-foto .close').addEventListener('click', function (e) {
