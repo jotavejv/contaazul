@@ -58,7 +58,7 @@ function currencyFormat (num) {
 
 
 function render (cars) {
-    console.log("render", cars);
+    //console.log("render", cars);
 
     if (cars.length > 5) {
         $('#pagination').classList.add('active');
@@ -114,8 +114,8 @@ ${cars.map( (car, index) =>
             let index = +(e.target.closest('tr').id);
             cars = carsPagination;
             cars.splice(index, 1);
+            store.set('cars', cars);
             render(cars);
-            console.log(cars);
         }
     }));
 }
@@ -142,23 +142,30 @@ $('.modal-foto .close').addEventListener('click', function (e) {
 });
 
 $('.btn.cadastro').addEventListener('click', function () {
+    //persiste dados até serem submetidos
     $('.modal--carro').classList.add('active');
-    $('.modal--carro form').reset();
-    $('.modal--carro form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        let form = new FormData(e.target)
-        let newCar = {};
-        for (let [key, value] of form.entries()) {
-            newCar[key] = value;
-        }
-        cars = carsPagination;
-        cars.unshift(newCar);
-        store.set('cars', cars);
-        console.log(newCar);
-        $('.modal--carro').classList.remove('active');
-        //alert('sucesso');
-        render(cars);
-    });
+});
+
+$('.modal--carro .close').addEventListener('click', function (e) {
+    e.preventDefault();
+    $('.modal--carro').classList.remove('active');
+});
+
+$('.modal--carro form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let form = new FormData(e.target);
+    let newCar = {};
+    for (let [key, value] of form.entries()) {
+        console.log(key, value);
+        newCar[key] = value;
+    }
+    cars = carsPagination;
+    cars.unshift(newCar);
+    store.set('cars', cars);
+    console.log(newCar);
+    $('.modal--carro').classList.remove('active');
+    render(cars);
+    e.target.reset();
 });
 
 
