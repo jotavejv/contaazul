@@ -99,4 +99,95 @@ input[type="number"]{
       transform: rotate(45deg);
     }
   }
+  &.icon--trash{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 4px;
+    position:relative;
+    top: 2px;
+    width:2.1em;
+    height:2.5em;
+    background: #ef5350;
+    border-bottom-left-radius: 0.6em;
+    border-bottom-right-radius: 0.6em;
+    box-shadow: inset 0 0 0 0.5em #ef5350,inset 0.55em 0.2em 0 0.15em #fff,inset -0.55em 0.2em 0 0.15em #fff,
+    inset 0.9em 0 0 0.15em #ef5350,inset 1em 0 0 0.15em #fff;
+    transition: all .2s ease;
+    &:before{
+      content: "";
+      position: absolute;
+      top: -0.6em;
+      left: -0.15em;
+      width: 2.2em;
+      height: 0.15em;
+      background: #ef5350;
+      border: 0.15em solid #ef5350;
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+
+    }
+    &:after{
+      content:"";
+      position:absolute;
+      display:block;
+      top: -1.2em;
+      left: 0.8em;
+      bottom:4.2em;
+      width: 0.6em;
+      height:0.6em;
+      background: #ef5350;
+      border-top-left-radius: 0.3em;
+      border-top-right-radius: 0.3em;
+    }
+    &.active{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &.icon--pencil{
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+    font-size: 12px;
+    position: relative;
+    left: 15px;
+    width: 0.35em;
+    height: 0.8em;
+    background: #2687E9;
+    transform: rotate(45deg) translateY(5px);
+    transition: all .2s .2s ease;
+    &:before{
+      content: "";
+      position: absolute;
+      top: -0.35em;
+      left: 0;
+      width: 0.35em;
+      height: 0.3em;
+      background: #2687E9;
+      border-radius: 0.1em;
+    }
+    &:after{
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0.85em;
+      left: 0;
+      border: solid 0.2em #2687E9;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-top: solid 0.45em #2687E9;
+    }
+    &.active{
+      transform: rotate(45deg) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }

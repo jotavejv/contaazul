@@ -83,8 +83,8 @@ function render (cars) {
     }
 
     let template = `
-${cars.map(car =>
-        `<tr>
+${cars.map( (car, index) =>
+        `<tr id="${index}">
         <td><input type="checkbox" id="check-${car.placa}"><span class="icon icon--check"></span>${car.placa} <div class="icon icon--trash"></div><div class="icon icon--pencil"></div></td>
         <td>${car.modelo}</td>
         <td>${car.marca}</td>
@@ -107,6 +107,16 @@ ${cars.map(car =>
         event.target.closest('tr').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--trash').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--pencil').classList.toggle('active');
+    }));
+
+    Array.from($$('.icon--trash')).forEach( item => item.addEventListener('click', function (e) {
+        if(confirm("Deseja realmente excluir este item?")){
+            let index = +(e.target.closest('tr').id);
+            cars = carsPagination;
+            cars.splice(index, 1);
+            render(cars);
+            console.log(cars);
+        }
     }));
 }
 render(cars);
@@ -141,6 +151,7 @@ $('.btn.cadastro').addEventListener('click', function () {
         for (let [key, value] of form.entries()) {
             newCar[key] = value;
         }
+        cars = carsPagination;
         cars.unshift(newCar);
         store.set('cars', cars);
         console.log(newCar);
