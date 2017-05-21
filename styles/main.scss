@@ -10,7 +10,7 @@ html, body{
   height:100%;
 }
 body{
-  background: url("../layout.png") no-repeat center top;
+ // background: url("../layout.png") no-repeat center top;
   background-color: #F1F4F9;
 }
 
@@ -115,6 +115,9 @@ header.main-header{
         color: #67819A;
         font-weight: bold;
         padding: 18px 10px;
+        &:first-child {
+          text-transform: uppercase;
+        }
         .icon--check{
           top: 20px !important;
         }
@@ -157,6 +160,12 @@ header.main-header{
 footer{
   max-width: $layout;
   margin: 0 auto;
+  #pagination{
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
   ul{
     display: flex;
     justify-content: center;
@@ -187,7 +196,7 @@ footer{
         background: $highlight;
         border-color: #58A2ED;
       }
-      a{
+      a, span{
         display: block;
       }
     }

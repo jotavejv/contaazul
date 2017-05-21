@@ -16,31 +16,7 @@ if (window.Element && !Element.prototype.closest) {
         };
 }
 
-const root = null;
-const useHash = true;
-const hash = '#!'; // Defaults to: '#'
-const router = new Navigo(root, useHash, hash);
-router
-    .on({
-        '/carros/:id': function (param){
-            console.log(param.id);
-            if(isNaN(param.id)) router.navigate('/carros');
-        },
-        'carros': function () {
-            console.log('home');
-        },
-        '*': function () {
-            router.navigate('/carros');
-        }
-    })
-    .resolve();
-
-//currency
-function currencyFormat (num) {
-    return (+num).toFixed(2).replace(",", ".").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-}
-
-// init
+//model
 if(!store.get('cars')){
     //model
     let cars = [
@@ -73,9 +49,39 @@ if(!store.get('cars')){
 }
 
 let cars = store.get('cars');
+let carsPagination = cars;
+
+//currency
+function currencyFormat (num) {
+    return (+num).toFixed(2).replace(",", ".").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+}
+
 
 function render (cars) {
     console.log("render", cars);
+
+    if (cars.length > 5) {
+        $('#pagination').classList.add('active');
+        carsPagination = cars;
+        cars = cars.slice(0, 5);
+        let carsPerPage = Math.ceil((carsPagination.length / 5)); // numero depaginaçao
+        let $li = [];
+        for (let i = 0; i < carsPerPage; i++) {
+            $li[i] = i + 1;
+        }
+
+        let template = `
+                    <ul>
+                        <li><span id="prev"> << </span></li>
+                        ${$li.map(page =>
+            `<li><a href="#!/carros/${page}" id="page-${page}">${page}</a></li>`).join('')
+            }
+                        <li><span id="next"> >> </span></li>
+                    </ul>
+            `;
+        $('#pagination').innerHTML = template;
+    }
+
     let template = `
 ${cars.map(car =>
         `<tr>
@@ -86,8 +92,7 @@ ${cars.map(car =>
         <td>${car.combustivel}</td>
         <td>${currencyFormat(car.valor)}</td>
     </tr>`).join('')
-        }
-`;
+        }`;
     $('#data').innerHTML = template;
 }
 render(cars);
@@ -100,19 +105,25 @@ Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function
 }));
 
 Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
-    console.log("check");
     event.target.closest('tr').classList.toggle('active');
 }));
 
+$('#prev').addEventListener('click', function () {
+    let currentPage = $('#pagination li.active a').textContent;
+    let goPage = '#!/carros/'+(+currentPage - 1);
+    console.log(goPage);
+    router.navigate(goPage)
+});
+
 
 $('.modal-foto .close').addEventListener('click', function (e) {
-    console.log("close", e.target.parentNode)
     e.preventDefault();
     e.target.closest('.modal-foto').classList.remove('active');
-})
+});
 
 $('.btn.cadastro').addEventListener('click', function () {
     $('.modal-carro').classList.add('active');
+    $('.modal-carro form').reset();
     $('.modal-carro form').addEventListener('submit', function (e) {
         e.preventDefault();
         let form = new FormData(e.target)
@@ -128,3 +139,39 @@ $('.btn.cadastro').addEventListener('click', function () {
         render(cars);
     });
 });
+
+
+//route
+const root = null;
+const useHash = true;
+const hash = '#!';
+const router = new Navigo(root, useHash, hash);
+router
+    .on({
+        '/carros/:id': function (param){
+            console.info("page ", param.id);
+            if(isNaN(param.id)) router.navigate('/carros');
+
+            let pageCars = carsPagination;
+            if (param.id > 1){
+                console.warn(pageCars, ((param.id*5) - 5), (param.id*5));
+                pageCars = carsPagination.slice( ((param.id*5) - 5), (param.id*5) );
+                console.log("maior que um", pageCars);
+                render(pageCars);
+            }else{
+                pageCars = carsPagination.slice(0, 5);
+                render(pageCars);
+            }
+
+            //active page
+            Array.from($$('#pagination li')).forEach( li => li.classList.remove('active'));
+            $('#page-'+param.id).closest('li').classList.add('active');
+        },
+        'carros': function () {
+            console.log('home');
+        },
+        '*': function () {
+            router.navigate('/carros');
+        }
+    })
+    .resolve();

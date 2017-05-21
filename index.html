@@ -48,12 +48,6 @@
 			<footer>
 				<div id="pagination">
 					<!--template-->
-					<ul>
-						<li><span> << </span></li>
-						<li><a href="carros/1" data-navigo>1</a></li>
-						<li><a href="carros/2" data-navigo>2</a></li>
-						<li><span> >> </span></li>
-					</ul>
 				</div>
 			</footer>
 		</div>
@@ -80,7 +74,7 @@
 						</thead>
 						<tbody>
 						<tr>
-							<td><input type="text" name="placa" placeholder="_ _ _ - _ _ _ _" pattern="[a-z]{3}-\d{4}" required></td>
+							<td><input type="text" name="placa" placeholder="_ _ _ - _ _ _ _" pattern="[a-z | A-Z]{3}-\d{4}" maxlength="8" required></td>
 							<td><input type="text" name="modelo" required></td>
 							<td><input type="text" name="marca" required></td>
 							<td><input type="url" name="imagem" placeholder="URL da foto"></td>
