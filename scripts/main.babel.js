@@ -126,10 +126,6 @@ ${cars.map( (car, index) =>
             $(`.modal--carro-update input[name=${key}]`).value = carsPagination[index][key];
         });
 
-        // cars.splice(index, 1);
-        // store.set('cars', cars);
-        // render(cars);
-
         $('.modal--carro-update form').addEventListener('submit', function (e) {
             e.preventDefault();
             cars = carsPagination;
@@ -200,23 +196,29 @@ $('.modal--carro form').addEventListener('submit', function (e) {
     e.target.reset();
 });
 
-// $('.modal--carro-update form').addEventListener('submit', function (e) {
-//     e.preventDefault();
-//     console.log("update submit")
-//     let form = new FormData(e.target);
-//     let newCar = {};
-//     for (let [key, value] of form.entries()) {
-//         console.log(key, value);
-//         newCar[key] = value;
-//     }
-//     // cars = carsPagination;
-//     // cars.unshift(newCar);
-//     // store.set('cars', cars);
-//     // console.log(newCar);
-//     // $('.modal--carro').classList.remove('active');
-//     // render(cars);
-//     // e.target.reset();
-// });
+// search
+const options = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+        "combustivel",
+        "marca"
+    ]
+};
+let fuse = new Fuse(carsPagination, options); // "list" is the item array
+
+$('.search form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let search = $('.search input').value;
+    let result = fuse.search(search);
+    console.info(result);
+    render(result);
+});
+
 
 
 //route
