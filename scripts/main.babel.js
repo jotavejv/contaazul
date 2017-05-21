@@ -94,19 +94,20 @@ ${cars.map(car =>
     </tr>`).join('')
         }`;
     $('#data').innerHTML = template;
+
+    // init dom events
+    Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function (e) {
+        e.preventDefault();
+        let source = e.target.href;
+        $('.modal-foto img').src = source;
+        $('.modal-foto').classList.add('active');
+    }));
+
+    Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
+        event.target.closest('tr').classList.toggle('active');
+    }));
 }
 render(cars);
-
-Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function (e) {
-    e.preventDefault();
-    let source = e.target.href;
-    $('.modal-foto img').src = source;
-    $('.modal-foto').classList.add('active');
-}));
-
-Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
-    event.target.closest('tr').classList.toggle('active');
-}));
 
 $('#prev').addEventListener('click', function () {
     let currentPage = $('#pagination li.active a').textContent;
