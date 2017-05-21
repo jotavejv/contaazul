@@ -105,6 +105,8 @@ ${cars.map(car =>
 
     Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
         event.target.closest('tr').classList.toggle('active');
+        event.target.closest('tr').querySelector('.icon--trash').classList.toggle('active');
+        event.target.closest('tr').querySelector('.icon--pencil').classList.toggle('active');
     }));
 }
 render(cars);
