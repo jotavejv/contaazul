@@ -57,31 +57,35 @@ function currencyFormat (num) {
 }
 
 
-function render (cars) {
+function render (cars, search) {
 
-    if (cars.length > 5) {
-        console.log('has pagination');
-        $('#pagination').classList.add('active');
-        carsPagination = cars;
-        cars = cars.slice(0, 5);
-        let carsPerPage = Math.ceil((carsPagination.length / 5)); // numero depaginaçao
-        let $li = [];
-        for (let i = 0; i < carsPerPage; i++) {
-            $li[i] = i + 1;
-        }
+    if(!search){
+        if (cars.length > 5) {
+            console.log('has pagination');
+            $('#pagination').classList.add('active');
+            carsPagination = cars;
+            cars = cars.slice(0, 5);
+            let carsPerPage = Math.ceil((carsPagination.length / 5)); // numero depaginaçao
+            let $li = [];
+            for (let i = 0; i < carsPerPage; i++) {
+                $li[i] = i + 1;
+            }
 
-        let template = `
+            let template = `
                     <ul>
                         <li><span id="prev"> << </span></li>
                         ${$li.map(page =>
-            `<li><a href="#!/carros/${page}" id="page-${page}">${page}</a></li>`).join('')
-            }
+                `<li><a href="#!/carros/${page}" id="page-${page}">${page}</a></li>`).join('')
+                }
                         <li><span id="next"> >> </span></li>
                     </ul>
             `;
-        $('#pagination').innerHTML = template;
+            $('#pagination').innerHTML = template;
+        }else{
+            console.log('no pagination');
+        }
     }else{
-        console.log('no pagination')
+        $('#pagination').classList.remove('active');
     }
 
     let template = `
@@ -218,7 +222,14 @@ $('.search form').addEventListener('submit', function (e) {
     let search = $('.search input').value;
     let result = fuse.search(search);
     console.info(result);
-    render(result);
+    render(result, true);
+});
+
+$('.search input').addEventListener('input', function (e) {
+    if(!e.target.value){
+        console.log("no search");
+        render(carsPagination);
+    }
 });
 
 
