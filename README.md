@@ -1,6 +1,6 @@
 # README
 
-### Como rodar oprojeto
+### Como rodar o projeto
 
 `pingy dev`
 
