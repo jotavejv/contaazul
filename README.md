@@ -2,7 +2,9 @@
 
 ### Como rodar o projeto
 
-`pingy dev`
+`pingy dev` => Requerimento Node v6+ 
+
+Caso não reconheça o comando pingy, rodar `npm start`
 
 Esse comando iá compilar o sass e abrir o navegador automáticamente já com o live reload.
 
