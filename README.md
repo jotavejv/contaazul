@@ -12,6 +12,10 @@ Esse comando iá compilar o sass e abrir o navegador automáticamente já com o 
         |-- ContaAzul.png
     |-- scripts
         |-- main.js
+        |-- main.babel.js
+        |-- dom.js
+        |-- utils.js
+        |-- routes.js
         |-- fuse.min.js
         |-- navigo.min.js
         |-- store.min.js

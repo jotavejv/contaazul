@@ -89,7 +89,7 @@ ${cars.map( (car, index) =>
         $('.modal-foto').classList.add('active');
     }));
 
-    Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) { // change event para checkbox dos carros
+    Array.from($$('#data input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) { // change event para checkbox dos carros
         event.target.closest('tr').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--trash').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--pencil').classList.toggle('active');
@@ -191,6 +191,19 @@ $('.modal--carro .close').addEventListener('click', function (e) {
 $('.modal--carro-update .close').addEventListener('click', function (e) {
     e.preventDefault();
     $('.modal--carro-update').classList.remove('active');
+});
+
+/***
+ * check all items
+ */
+
+$('#checkAll').addEventListener('change', function () {
+    Array.from($$('#data input[type="checkbox"]')).forEach( check => {
+        check.closest('tr').classList.toggle('active');
+        check.closest('tr').querySelector('.icon--trash').classList.toggle('active');
+        check.closest('tr').querySelector('.icon--pencil').classList.toggle('active');
+        check.checked = !check.checked;
+    });
 });
 
 /***
