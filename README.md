@@ -23,6 +23,7 @@ Esse comando iá compilar o sass e abrir o navegador automáticamente já com o 
         |-- store.min.js
     |-- styles
         |-- main.scss
+        |-- main.css
         |-- componentes
             |-- _skin.scss
             |-- animations.scss
