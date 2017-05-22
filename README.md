@@ -8,6 +8,8 @@ Caso não reconheça o comando pingy, rodar `npm start` ou instalar o pingy glob
 
 Esse comando iá compilar o sass e abrir o navegador automáticamente já com o live reload.
 
+Caso ocorra erros com o ambiente de configuração, apenas abra o arquivo `index.html` pois já está com os arquivos compilados do teste.
+
 ## Estrutura
 
     |-- images
