@@ -1,4 +1,4 @@
-﻿# README
+# README
 
 ### Como rodar oprojeto
 
@@ -29,3 +29,5 @@ Esse comando iá compilar o sass e abrir o navegador automáticamente já com o 
     |-- index.html
     |-- CONSIDERACOES_GERAIS.md
     |-- README.md
+    
+#### Informações importantes leia `CONSIDERACOES_GERAIS.md`
