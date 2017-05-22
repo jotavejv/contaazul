@@ -16,7 +16,6 @@ Caso ocorra erros com o ambiente de configuração, apenas abra o arquivo `index
         |-- ContaAzul.png
     |-- scripts
         |-- main.js
-        |-- main.babel.js
         |-- dom.js
         |-- utils.js
         |-- routes.js
