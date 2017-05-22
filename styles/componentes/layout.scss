@@ -1,9 +1,13 @@
-//commmon layout
+/***
+  Common Layout
+***/
 $layout: 1024px;
 $base-font-size: 12px;
 $base-font: 'Open Sans', sans-serif;
 
-//general
+/***
+  Definições gerais
+***/
 *{
   box-sizing: border-box;
 }
@@ -20,7 +24,10 @@ body{
   font-family: $base-font;
 }
 
-//buttons
+/***
+  BUTTONS
+***/
+
 button{
   border: none;
   background: transparent;
@@ -42,7 +49,10 @@ button{
   }
 }
 
-//form
+/***
+  FORM
+***/
+
 input[type="text"],
 input[type="url"],
 input[type="number"]{
@@ -53,7 +63,10 @@ input[type="number"]{
   background: transparent;
 }
 
-//icons
+/***
+  ICONS
+***/
+
 .icon{
   position: relative;
   display: inline-block;
