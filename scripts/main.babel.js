@@ -58,9 +58,9 @@ function currencyFormat (num) {
 
 
 function render (cars) {
-    //console.log("render", cars);
 
     if (cars.length > 5) {
+        console.log('has pagination');
         $('#pagination').classList.add('active');
         carsPagination = cars;
         cars = cars.slice(0, 5);
@@ -80,6 +80,8 @@ function render (cars) {
                     </ul>
             `;
         $('#pagination').innerHTML = template;
+    }else{
+        console.log('no pagination')
     }
 
     let template = `
