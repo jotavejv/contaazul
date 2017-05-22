@@ -25,6 +25,7 @@ Caso ocorra erros com o ambiente de configuração, apenas abra o arquivo `index
         |-- store.min.js
     |-- styles
         |-- main.scss
+        |-- main.css
         |-- componentes
             |-- _skin.scss
             |-- animations.scss
