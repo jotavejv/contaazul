@@ -61,7 +61,6 @@ function render (cars, search) {
 
     if(!search){
         if (cars.length > 5) {
-            console.log('has pagination');
             $('#pagination').classList.add('active');
             carsPagination = cars;
             cars = cars.slice(0, 5);
@@ -81,8 +80,6 @@ function render (cars, search) {
                     </ul>
             `;
             $('#pagination').innerHTML = template;
-        }else{
-            console.log('no pagination');
         }
     }else{
         $('#pagination').classList.remove('active');
