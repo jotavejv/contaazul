@@ -31,7 +31,7 @@ if(!store.get('cars')){
     store.set('cars', cars);
 }
 
-let cars = store.get('cars'); // set localstorage
+let cars = store.get('cars'); // get localstorage
 let carsPagination = cars; // guarda referencia
 
 
