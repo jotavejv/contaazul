@@ -2,7 +2,7 @@
 
 ### Como rodar o projeto
 
-`pingy dev` => Requerimento Node v6+ 
+Depois do  `npm install` => rodar `pingy dev` => Requerimento Node v6+ 
 
 Caso não reconheça o comando pingy, rodar `npm start`
 
