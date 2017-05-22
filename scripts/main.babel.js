@@ -1,24 +1,7 @@
-//dom
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-/* .closest() polyfill */
-if (window.Element && !Element.prototype.closest) {
-    Element.prototype.closest =
-        function(s) {
-            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                i,
-                el = this;
-            do {
-                i = matches.length;
-                while (--i >= 0 && matches.item(i) !== el) {};
-            } while ((i < 0) && (el = el.parentElement));
-            return el;
-        };
-}
-
-//model
+/***
+ * MODEL
+ */
 if(!store.get('cars')){
-    //model
     let cars = [
         {
             "combustivel": "Flex",
@@ -48,28 +31,27 @@ if(!store.get('cars')){
     store.set('cars', cars);
 }
 
-let cars = store.get('cars');
-let carsPagination = cars;
-
-//currency
-function currencyFormat (num) {
-    return (+num).toFixed(2).replace(",", ".").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-}
+let cars = store.get('cars'); // set localstorage
+let carsPagination = cars; // guarda referencia
 
 
+/***
+ * Render
+ */
 function render (cars, search) {
 
     if(!search){
-        if (cars.length > 5) {
+        if (cars.length > 5) { // verifica se possui itens suficientes para criar a paginação
             $('#pagination').classList.add('active');
             carsPagination = cars;
             cars = cars.slice(0, 5);
-            let carsPerPage = Math.ceil((carsPagination.length / 5)); // numero depaginaçao
+            let carsPerPage = Math.ceil((carsPagination.length / 5)); // número de paginação
             let $li = [];
             for (let i = 0; i < carsPerPage; i++) {
                 $li[i] = i + 1;
             }
 
+            // template a ser rendirizado na paginação
             let template = `
                     <ul>
                         <li><span id="prev"> << </span></li>
@@ -82,9 +64,10 @@ function render (cars, search) {
             $('#pagination').innerHTML = template;
         }
     }else{
-        $('#pagination').classList.remove('active');
+        $('#pagination').classList.remove('active'); // remove paginação em caso de search
     }
 
+    // template a renderizar a tabela de carros
     let template = `
 ${cars.map( (car, index) =>
         `<tr id="${index}">
@@ -99,20 +82,20 @@ ${cars.map( (car, index) =>
     $('#data').innerHTML = template;
 
     // init dom events
-    Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function (e) {
+    Array.from($$('.foto')).forEach( foto => foto.addEventListener('click', function (e) { // modal de cada imagem/foto do carro
         e.preventDefault();
         let source = e.target.href;
         $('.modal-foto img').src = source;
         $('.modal-foto').classList.add('active');
     }));
 
-    Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) {
+    Array.from($$('input[type="checkbox"]')).forEach( check => check.addEventListener('change', function (e) { // change event para checkbox dos carros
         event.target.closest('tr').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--trash').classList.toggle('active');
         event.target.closest('tr').querySelector('.icon--pencil').classList.toggle('active');
     }));
 
-    Array.from($$('.icon--trash')).forEach( item => item.addEventListener('click', function (e) {
+    Array.from($$('.icon--trash')).forEach( item => item.addEventListener('click', function (e) { // excluir carro
         if(confirm("Deseja realmente excluir este item?")){
             let index = +(e.target.closest('tr').id);
             cars = carsPagination;
@@ -122,14 +105,14 @@ ${cars.map( (car, index) =>
         }
     }));
 
-    Array.from($$('.icon--pencil')).forEach( item => item.addEventListener('click', function (e) {
+    Array.from($$('.icon--pencil')).forEach( item => item.addEventListener('click', function (e) { // edição do carro: abre o modal de edição
         $('.modal--carro-update').classList.add('active');
         let index = +(e.target.closest('tr').id);
         Object.keys(carsPagination[index]).forEach(key => {
             $(`.modal--carro-update input[name=${key}]`).value = carsPagination[index][key];
         });
 
-        $('.modal--carro-update form').addEventListener('submit', function (e) {
+        $('.modal--carro-update form').addEventListener('submit', function (e) { // edição do carro no submit
             e.preventDefault();
             cars = carsPagination;
             let form = new FormData(e.target);
@@ -137,7 +120,6 @@ ${cars.map( (car, index) =>
                 console.log(cars[index][key]);
                 cars[index][key] = value;
             }
-            console.info(cars[index]);
             store.set('cars', cars);
             $('.modal--carro-update').classList.remove('active');
             render(cars);
@@ -147,6 +129,9 @@ ${cars.map( (car, index) =>
 }
 render(cars);
 
+/***
+ * next/prev paginação
+ */
 $('#prev').addEventListener('click', function () {
     let currentPage = $('#pagination li.active a').textContent;
     let goPage = '#!/carros/'+(+currentPage - 1);
@@ -162,27 +147,23 @@ $('#next').addEventListener('click', function () {
     router.navigate(goPage)
 });
 
+/***
+ * Modal foto close
+ */
 $('.modal-foto .close').addEventListener('click', function (e) {
     e.preventDefault();
     e.target.closest('.modal-foto').classList.remove('active');
 });
 
+/***
+ * Modal cadastro novo
+ */
 $('.btn.cadastro').addEventListener('click', function () {
     //persiste dados até serem submetidos
     $('.modal--carro').classList.add('active');
 });
 
-$('.modal--carro .close').addEventListener('click', function (e) {
-    e.preventDefault();
-    $('.modal--carro').classList.remove('active');
-});
-
-$('.modal--carro-update .close').addEventListener('click', function (e) {
-    e.preventDefault();
-    $('.modal--carro-update').classList.remove('active');
-});
-
-$('.modal--carro form').addEventListener('submit', function (e) {
+$('.modal--carro form').addEventListener('submit', function (e) { //
     e.preventDefault();
     let form = new FormData(e.target);
     let newCar = {};
@@ -199,7 +180,22 @@ $('.modal--carro form').addEventListener('submit', function (e) {
     e.target.reset();
 });
 
-// search
+$('.modal--carro .close').addEventListener('click', function (e) {
+    e.preventDefault();
+    $('.modal--carro').classList.remove('active');
+});
+
+/***
+ * Modal update close
+ */
+$('.modal--carro-update .close').addEventListener('click', function (e) {
+    e.preventDefault();
+    $('.modal--carro-update').classList.remove('active');
+});
+
+/***
+ * Search
+ */
 const options = {
     shouldSort: true,
     threshold: 0.6,
@@ -212,9 +208,9 @@ const options = {
         "marca"
     ]
 };
-let fuse = new Fuse(carsPagination, options); // "list" is the item array
+let fuse = new Fuse(carsPagination, options);
 
-$('.search form').addEventListener('submit', function (e) {
+$('.search form').addEventListener('submit', function (e) { // Pesquisa no submit: passa parametro no render para remover a paginação e listar toa busca
     e.preventDefault();
     let search = $('.search input').value;
     let result = fuse.search(search);
@@ -222,52 +218,8 @@ $('.search form').addEventListener('submit', function (e) {
     render(result, true);
 });
 
-$('.search input').addEventListener('input', function (e) {
+$('.search input').addEventListener('input', function (e) { // Campo vazio do search retorna os dados inicias automaticamente
     if(!e.target.value){
-        console.log("no search");
         render(carsPagination);
     }
 });
-
-
-
-//route
-const root = null;
-const useHash = true;
-const hash = '#!';
-const router = new Navigo(root, useHash, hash);
-router
-    .on({
-        '/carros/:id': function (param){
-            console.info("page ", param.id);
-            if(isNaN(param.id)) router.navigate('/carros');
-
-            let pageCars = carsPagination;
-            if (param.id > 1){
-
-                pageCars = carsPagination.slice( ((param.id*5) - 5), (param.id*5) );
-                if(!pageCars.length){
-                    router.navigate('/carros');
-                    pageCars = carsPagination.slice(0, 5);
-                    render(pageCars);
-                }else{
-                    render(pageCars);
-                }
-
-            }else{
-                pageCars = carsPagination.slice(0, 5);
-                render(pageCars);
-            }
-
-            //active page
-            Array.from($$('#pagination li')).forEach( li => li.classList.remove('active'));
-            $('#page-'+param.id).closest('li').classList.add('active');
-        },
-        'carros': function () {
-            console.log('home');
-        },
-        '*': function () {
-            router.navigate('/carros');
-        }
-    })
-    .resolve();

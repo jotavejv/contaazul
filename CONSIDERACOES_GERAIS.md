@@ -11,6 +11,7 @@ Sabendo disso, eis o motivo da estrutura de split de código estar no html.
 - Search paginação
 - Tooling (webpack, code split, build, minificação...)
 - Pixel Perfect com o PSD original
+- Validar e testar todos edge cases das rotas
 
 3 - Considerações pessoais
 
