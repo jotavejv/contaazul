@@ -9,6 +9,7 @@ router
     .on({
         '/carros/:id': function (param){
             console.info("page ", param.id);
+            // :id refere-se ao numero da pagina
             if(isNaN(param.id)) router.navigate('/carros');
 
             let pageCars = carsPagination;
