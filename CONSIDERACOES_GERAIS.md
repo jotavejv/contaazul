@@ -1,6 +1,6 @@
-﻿# Considerações Gerais
+# Considerações Gerais
 
-1 - Nesse teste não utilizei `module bundlers` como Webpack por exemplo, pois utilizei uma ferramenta de tooling nova que tinha intenção de testar (pingy cli), no entanto essa ferramenta não vem com as config nessárias para o bundle e com isso não tive tempo de organizar o ambiente com o webpack.
+1 - Nesse teste não utilizei `module bundlers` como Webpack por exemplo, pois utilizei uma ferramenta de tooling nova que tinha intenção de testar (pingy cli), no entanto essa ferramenta não vem com as config nessárias para o bundle e com isso não tive tempo de organizar o ambiente com o webpack. Além do fato de que tive apenas 2 dias pra realizar o teste devido à problemas de saúde durante a semana.
 Levando isso em consideração informo que tenho plena consciência de que para homologar a produção deveriam ter os polyfils necessários.
 Sabendo disso, eis o motivo da estrutura de split de código estar no html.
 
